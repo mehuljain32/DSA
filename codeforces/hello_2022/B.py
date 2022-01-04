@@ -20,48 +20,52 @@ def mi(row,col):
 
 def solve():
   n = ii()
-  seg = []
+
+  max_int = 9999999999
+
+  min_left = max_int
+  cost_min_left = max_int
+
+  max_right = 0
+  cost_max_right = max_int
+
+  max_len = 0
+  cost_len = max_int
+
   for i in range(n):
-    seg.append(li())
-  curr_min = 0
-  curr_max = 0
-  curr_min_cost = 0
-  res = []
-  # for curr in range(len(seg)):
-  #   if len(res) > 0:
-  #     if seg[curr][0] > curr_min and seg[curr][1] > curr_max:
-  #       res.append(curr_min_cost + seg[curr][2])
-  #       curr_min = min(curr_min, seg[curr][0])
-  #       curr_max = max(curr_max, seg[curr][1])
-  #       curr_min_cost = min(curr_min_cost,seg[curr][2])
 
-  #     elif seg[curr][1] > curr_max:
-  #       res.append(seg[curr][2])
-  #       curr_min = min(curr_min, seg[curr][0])
-  #       curr_max = max(curr_max, seg[curr][1])
-  #       curr_min_cost = min(curr_min_cost,seg[curr][2])
-  #     elif seg[curr][0] <= curr_min and seg[curr][1] <= curr_max:
-  #       res.append(res[-1])
-  #     else:
-  #       res.append(seg[curr][2] + curr_min_cost)
-  #       curr_min = min(curr_min, seg[curr][0])
-  #       curr_max = max(curr_max, seg[curr][1])
-        curr_min_cost = min(curr_min_cost,seg[curr][2])
-      #   if seg[curr][0] > seg[curr-1][0] and seg[curr][1] > seg[curr-1][1]:
-      #     res.append(seg[curr][2] + seg[curr-1][2])
-      #     curr_min = min(seg[curr][0], seg[curr-1][0])
-      #     curr_max = max(seg[curr][1], seg[curr-1][1])
-      #     curr_min_cost = min(seg[curr][2],seg[curr-1][2])
-      # else:  
-    else:
-      res.append(seg[curr][2])
-      curr_min = seg[curr][0]
-      curr_max = seg[curr][1]
-      curr_min_cost = seg[curr][2]
-  for i in res:
-    print(i)
-  
+    arr = sys.stdin.readline().split(" ")
 
+    l = int(arr[0])
+    r = int(arr[1])
+    curr_cost = int(arr[2])
+
+    if l < min_left:
+      min_left = l
+      cost_min_left = max_int
+
+    if l == min_left:
+      cost_min_left = min(cost_min_left, curr_cost)
+
+    if max_right < r:
+      max_right = r
+      cost_max_right = max_int
+
+    if max_right == r:
+      cost_max_right = min(cost_max_right, curr_cost)
+
+    if max_len < (r-l+1):
+      max_len = r-l+1
+      cost_len = max_int
+
+    if max_len == (r-l+1):
+      cost_len = min(cost_len, curr_cost)
+
+    res = cost_min_left + cost_max_right
+
+    if max_len == (max_right - min_left + 1):
+      res = min(res, cost_len)
+    print(res)
 t = ii()
 for _ in range(t):
   solve()

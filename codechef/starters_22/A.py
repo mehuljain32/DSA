@@ -1,9 +1,6 @@
 import math
 import sys
 from collections import defaultdict, Counter
-from bisect import bisect_left
-sys.setrecursionlimit(10**6)
-
 def ii():
   # return int(input())
   return int(sys.stdin.readline())
@@ -28,7 +25,18 @@ def ti():
   return tuple(int(i) for i in li())
 
 def solve():
+  n  = ii()
+  res = 0
 
+  if n % 2 > 0:
+    print(res)
+    return
+  while n > 1:
+    res += 1
+    n = n // 2
+    if n % 2 == 1:
+      break
+  print(res)
 
 
 t = ii()

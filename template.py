@@ -27,6 +27,11 @@ def mi(row,col):
 def ti():
   return tuple(int(i) for i in li())
 
+def gcd(a,b):
+  if b == 0:
+    return a
+  return gcd(b,a % b)
+
 def solve():
 
 
